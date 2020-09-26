@@ -1,0 +1,73 @@
+import java.util.Random;
+
+public class Main {
+	public static int Calc(int position, int roll, int option) {
+		switch(option) {
+		
+		case 1:
+			break;	
+		case 2 :
+			if( (position+roll)<=100 )
+				position=position+roll;
+			break;		
+		case 3 :
+			position = position - roll;
+			if(position<0)
+				position =0;
+			break;
+		
+		}
+		return position;
+		
+	}
+	
+	public static void main(String[] args) {
+		int pos_A = 0;
+		int total_rolls_A = 0;		
+		int pos_B = 0;
+		int total_rolls_B = 0;
+		//int toss = 
+		int flag= 0;
+		
+		while(pos_A <100 && pos_B<100) {
+			while(flag==0 && pos_B<100) {
+				Random random = new Random();
+				int roll = random.nextInt(7);
+				int option = random.nextInt(3);
+				System.out.println("Player A");
+				System.out.println("Previous pposition = "+pos_A);
+				System.out.println("Roll = "+roll);
+				System.out.println("Option = "+option);
+				if(option!=1)
+					flag = 1;
+				pos_A = Calc(pos_A, roll, option); 
+				total_rolls_A++;
+				System.out.println("New Position = "+pos_A);
+				System.out.println("Total Rolls = "+total_rolls_A);
+			}
+			flag =1;
+			while(flag==1&&pos_A<100) {
+				Random random = new Random();
+				int roll = random.nextInt(7);
+				int option = random.nextInt(3);
+				System.out.println("Player B");
+				System.out.println("Previous pposition = "+pos_B);
+				System.out.println("Roll = "+roll);
+				System.out.println("Option = "+option);
+				if(option!=1)
+					flag = 0;
+				pos_B = Calc(pos_B, roll, option); 
+				total_rolls_B++;
+				System.out.println("New Position = "+pos_B);
+				System.out.println("Total Rolls = "+total_rolls_B);
+			}
+			flag=0;			
+		}
+		
+		if(pos_A==100)
+			System.out.println("Player A wins");
+		else
+			System.out.println("Player B wins");		
+	}
+
+}
